@@ -1,0 +1,42 @@
+env:
+  browser: true
+  es2021: true
+extends:
+  - airbnb-typescript
+  - react-app
+  - eslint-config-prettier
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: './tsconfig.json'
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 12
+  sourceType: module
+plugins:
+  - react
+  - '@typescript-eslint'
+rules:
+  {
+    'max-len': ['error', { 'ignorePattern': "//|^/\\*\\*|^\\*", 'code': 120 }],
+    'react/prop-types': 'off',
+    'import/prefer-default-export': 'off',
+    'sort-imports': ['error', { ignoreDeclarationSort: true }],
+    'import/order':
+      [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: false },
+          pathGroups:
+            [
+              { pattern: 'react', position: 'before', group: 'external' },
+              {
+                pattern: '{components,enums,generated,hooks,pages,queries,remote,styles,types,ui,__fixtures__}/**',
+                group: 'internal',
+              },
+            ],
+          pathGroupsExcludedImportTypes: [],
+        },
+      ],
+  }
